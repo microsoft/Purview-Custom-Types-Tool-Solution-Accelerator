@@ -4,3 +4,7 @@
 .new_typedef_category .ms-ChoiceField-labelWrapper {
   max-width: none;
 }
+.form_rel_enddef td { padding:0.25em; }
+.enddef_select {
+  width: 10em;
+}

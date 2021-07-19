@@ -1,7 +1,3 @@
-/*!
- * Copyright (c) Microsoft Corporation and contributors. All rights reserved.
- * Licensed under the MIT License.
- */
 import React, { useState, useEffect } from 'react';
 
 // React context for token, & typedefs
@@ -480,6 +476,7 @@ export default function TypeDefNew(props) {
                         <td><Label required>EndDef1</Label></td>
                         <td className="form_rel_enddef_field">
                           <Dropdown
+                            className="enddef_select"
                             placeholder="Select a type definition..."
                             selectedKey={formEndDef1Type ? formEndDef1Type : ''}
                             onChange={(event, item) => { setFormEndDef1Type(item && item.key); }}
@@ -510,6 +507,7 @@ export default function TypeDefNew(props) {
                         <td><Label required>EndDef2</Label></td>
                         <td className="form_rel_enddef_field">
                           <Dropdown
+                            className="enddef_select"
                             placeholder="Select a type definition..."
                             selectedKey={formEndDef2Type ? formEndDef2Type : ''}
                             onChange={(event, item) => { setFormEndDef2Type(item && item.key); }}
