@@ -1,0 +1,66 @@
+.typedef_category_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1em 1em 0.25em 0.25em;
+  border-bottom: 1px solid #dedede;
+  margin: 0 1em 0.5em;
+}
+.typedef_category_header a:hover { text-decoration: none; }
+
+.typedef_category_name {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.typedef_category_icon {
+  padding-right: 0.5em;
+}
+
+.typedef_category_icon--open {
+  font-size:1em;
+}
+.typedef_category_icon--closed {
+  font-size: 0.7em;
+}
+
+.typedef_category_count {
+  text-align: right;
+}
+
+.typedef_new {
+  text-align: center;
+}
+.typedef_new_button {
+  margin: 2.5em auto 1.5em;
+  width: 80%;
+}
+
+.typedef_list_empty {
+  margin: 2em auto 0.5em;
+  max-width: 100px;
+}
+.typedef_category_lists {
+  margin-bottom: 5em;
+}
+
+.typedef_category_list {
+  display: none;
+  margin-bottom: 1em;
+  padding-left: 0;
+}
+.active_category { display: block; }
+
+.typedef_category_list_item {
+  list-style: none;
+}
+
+.typedef_category_list_item--active {
+  background-color: #edebe9;
+}
+
+.typedef_list_icon {
+  font-size: 1.2em;
+  padding-right: 0.25em;
+}

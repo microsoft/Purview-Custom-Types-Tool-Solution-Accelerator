@@ -1,0 +1,27 @@
+{
+  "routes": [
+    { "route": "/logout", "serve": "/.auth/logout" },
+    { "route": "/login",  "serve": "/.auth/login/aad" },
+    { "route": "/.auth/login/github",   "statusCode": "404" },
+    { "route": "/.auth/login/google",   "statusCode": "404" },
+    { "route": "/.auth/login/facebook", "statusCode": "404" },
+    { "route": "/.auth/login/twitter",  "statusCode": "404" },
+    {
+      "route": "/*",
+      "serve": "/",
+      "statusCode": 200,
+      "allowedRoles": ["admin"]
+    }
+  ],
+  "platformErrorOverrides": [
+    {
+      "errorType": "Unauthenticated",
+      "serve": "/.auth/login/aad"
+    },
+    {
+      "errorType": "NotFound",
+      "serve": "/index.html",
+      "statusCode": 200
+    }
+  ]
+}

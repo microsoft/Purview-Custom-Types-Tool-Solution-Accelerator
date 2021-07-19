@@ -1,0 +1,18 @@
+.select_servicetype_container {
+  display: flex;
+  align-items: center;
+  padding: 10em 0;
+}
+
+.select_servicetype_image {
+  padding: 0 3em;
+  text-align: right;
+}
+.select_servicetype_image img { max-width: 635px; }
+
+.select_servicetype_action {
+  padding: 2em;
+  min-width: 350px;
+  
+}
+

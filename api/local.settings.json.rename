@@ -1,0 +1,15 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage":      "",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+
+    "AadTenantId":              "YOUR_AZURE_TENANT_ID",
+    "AppClientId":              "YOUR_AZURE_APP_CLIENT_ID",
+    "AppClientSecret":          "YOUR_AZURE_APP_CLIENT_SECRET",
+    "AtlasAccountName":         "YOUR_AZURE_PURVIEW_ATLAS_ACCOUNT_NAME",
+    
+    "StorageConnectionString":  "YOUR_AZURE_STORAGE_CONNECTION_STRING",
+    "StorageContainer":         "NEW_CONTAINER_NAME"
+  }
+}

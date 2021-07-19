@@ -1,0 +1,12 @@
+.form_attributes {
+  border-spacing: 0px;
+  margin-bottom: 0.5em;
+}
+.form_attributes td { padding: 0.3em 0.15em; }
+
+.form_attribute_actions {
+  padding: 0 1em;
+}
+
+.form_attribute_optional { min-width: 100px; }
+.form_attribute_unique { min-width: 110px; }

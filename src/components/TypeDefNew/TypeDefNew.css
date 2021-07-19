@@ -1,0 +1,6 @@
+.new_typedef_category .ms-ChoiceField-wrapper {
+  min-width: 150px;
+}
+.new_typedef_category .ms-ChoiceField-labelWrapper {
+  max-width: none;
+}

@@ -1,0 +1,151 @@
+/*
+ * HTML Element Styles
+ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 1070px;
+  height: 100%;
+  background-color: #eee;
+  color: #212121;
+  margin: 0;
+  font-size: 1em; /* 1em = 16px */
+  font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.4;
+}
+
+/* Responsive images require bounding box */
+img {
+  width: 100%;
+  height: auto;
+}
+
+/* Headings */
+h1,h2,h3,h4,h5 {
+  color: #323130;
+  margin: 0 0 0.25em;
+}
+
+/* Lists */
+ul, ol {
+  margin: 0;
+  padding-left: 1.25em;
+}
+
+hr {
+  margin:1.5em 0;
+  border-top: 1px solid #eee;
+}
+
+/* Hyperlinks */
+a {
+  color: #0078d4;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Forms */
+select,
+input[type=text] {
+  padding: 0.3em 0.25em;
+}
+
+/*
+ * App-specific Styles
+ */
+.app_loading {
+  background-color: #0078d4;
+  color: #fff;
+  min-width: 600px;
+}
+.app_loading_title {
+  font-size: 3em;
+  font-weight: 100;
+  text-align: center;
+  margin: 1.25em 1em 1em;
+}
+.app_loading_status {
+  text-align: left;
+  color: #89c1eb;
+  padding: 0.5em;
+}
+
+.app_setup {
+  border: 1px solid #0078d4;
+  background-color: #fff;
+  color: #333;
+  padding: 1em;
+}
+
+.app {
+  margin: 0;
+  background-color: #fff;
+  color: #000;
+}
+.app_metadata {
+  text-align: center;
+  padding: 1em;
+  color: #333;
+  font-size: 0.85em;
+}
+
+/* Utilities */
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+.float-left { float: left; }
+.float-right { float: right; }
+.nowrap { white-space: nowrap; }
+.clickable { cursor: pointer; }
+.hidden { display:none; }
+
+/* Common Styles */
+.code {
+  width:100%;
+  margin: 1em 0;
+  background-color: #efefef;
+  border: 1px solid #dedede;
+  color: #333;
+}
+.code_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25em 1em;
+  background-color: #e6e6e6;
+  border: 1px solid #e6e6e6;
+}
+.code_block {
+  padding: 0.25em 1em;
+}
+
+.form_group { margin-bottom: 1em; }
+.form_group--extra { margin-bottom: 2em; }
+.form_label { font-size: 0.85em; }
+
+.button--delete:hover {
+  border: 1px solid #600;
+  background-color: #c00;
+  color: #fff;
+}
+.list_button {
+  width: 100%;
+  padding: 0 1em 0 2em;
+}
+.list_button:hover { background-color: #edebe9; }
+ 
+/* Fluent UI Overrides */
+.ms-MessageBar { margin-bottom: 1em; }
+
+/* Typography */
+.title, h1.title {
+  font-size: 2.25em;
+  font-weight: normal;
+}
+.muted { color:#666666; }

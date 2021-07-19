@@ -1,0 +1,14 @@
+.main {
+  box-shadow: 0 0.5em 1em 0 rgba(0,0,0,.16);
+}
+
+.breadcrumbs {
+  padding: 0.5em 1em;
+  border-bottom: 1px solid #dedede;
+}
+
+.breadcrumb_arrow {
+  padding: 0 0.5em;
+  color: #999;
+}
+
