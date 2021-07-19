@@ -1,3 +1,7 @@
+/*!
+ * Copyright (c) Microsoft Corporation and contributors. All rights reserved.
+ * Licensed under the MIT License.
+ */
 const { BlobServiceClient } = require("@azure/storage-blob");
 
 module.exports = async function (context, req) {

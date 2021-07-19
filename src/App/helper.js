@@ -1,3 +1,8 @@
+/*!
+ * Copyright (c) Microsoft Corporation and contributors. All rights reserved.
+ * Licensed under the MIT License.
+ */
+
 // Fetch user authentication API & set user state
 export async function fetchAuth(callback) {
   if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
