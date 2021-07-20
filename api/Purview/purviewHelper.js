@@ -233,9 +233,38 @@ async function postTypeDefs(token, typedefs) {
   return result;
 }
 
+// DELETE Type Def by GUID
+async function deleteTypeDefByGuid(token, guid) {
+  const apiUrl        = (token && `${apiPrefix}/atlas/v2/types/typedefs`) || null,
+        delBody       = apiUrl && guid && { entityDefs: [ {guid: guid} ] },
+        fetchOptions  = delBody && {
+                          method:  'DELETE',
+                          body:    JSON.stringify(delBody),
+                          headers: {
+                            'Content-Type':'application/json',
+                            'Authorization': `Bearer ${token}`
+                          }
+                        },
+        fetchResponse = apiUrl && await fetch(apiUrl, fetchOptions);
+
+  let result = null;
+  if (fetchResponse) {
+    const fetchStatus     = fetchResponse.status || 500,
+          fetchStatusText = fetchResponse.statusText || "Internal error";
+    result = {
+      status: fetchStatus,
+      statusText: fetchStatusText
+    }
+  }
+  else {
+    console.error('### Error: No response from fetch()');
+  }
+  return result;
+}
 
 module.exports = {
   getTypeDefs,
   getTypeDefByGuid,
-  postTypeDefs
+  postTypeDefs,
+  deleteTypeDefByGuid
 };

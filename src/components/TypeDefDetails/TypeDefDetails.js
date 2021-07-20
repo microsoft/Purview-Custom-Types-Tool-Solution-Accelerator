@@ -2,18 +2,24 @@
 // Licensed under the MIT License.
 import React, { useState, useEffect } from 'react';
 
+// React context for token, & typedefs
+import { useAadToken } from '../../contexts/AadTokenContext';
+import { useTypeDefs } from '../../contexts/TypeDefsContext';
+
 // Child components
 import CreateTemplate from '../../components/CreateTemplate/CreateTemplate';
 import Code           from '../../components/Code/Code';
 
 // Fluent UI
-import { Icon }                       from '@fluentui/react/lib/Icon';
-import { ActionButton }               from '@fluentui/react/lib/Button';
-import { MessageBar, MessageBarType } from '@fluentui/react';
+import { Icon }                             from '@fluentui/react/lib/Icon';
+import { ActionButton }                     from '@fluentui/react/lib/Button';
+import { MessageBar, MessageBarType }       from '@fluentui/react';
+import { Dialog, DialogType, DialogFooter } from '@fluentui/react/lib/Dialog';
+import { useBoolean }                       from '@fluentui/react-hooks';
+import { PrimaryButton, DefaultButton }     from '@fluentui/react/lib/Button';
 
 export default function TypeDefDetails(props) {
-  const 
-        typeDef           = (props && props.typeDef) || null,        
+  const typeDef           = (props && props.typeDef) || null,        
         serviceTypeName   = (props && props.serviceTypeName) || null,
         updateServiceView = (props && props.updateServiceView) || null,
 
@@ -47,8 +53,29 @@ export default function TypeDefDetails(props) {
 
         TypeDefIcon = () => (isRelationship)
           ? <Icon iconName="Relationship" className="servicetype_header_icon" />
-          : <Icon iconName="FileCode" className="servicetype_header_icon" />;
-  
+          : <Icon iconName="FileCode" className="servicetype_header_icon" />,
+
+        // Delete functionality
+        aadToken                    = useAadToken(), // AAD token from React context
+        useTypeDefsArray            = useTypeDefs(), // TypeDefs context
+        setRefresh                  = (useTypeDefsArray && useTypeDefsArray[1]) || null,
+        defaultDelState             = false,
+        defaultDelMsg               = 'Delete',
+        [deleted,    setDeleted]    = useState(defaultDelState),
+        [isDeleting, setIsDeleting] = useState(defaultDelState),
+        [deleteMsg,  setDeleteMsg]  = useState(defaultDelMsg),
+        [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true),
+        dialogContentProps = {
+                              type: DialogType.normal,
+                              title: 'Delete Type Definition?',
+                              closeButtonAriaLabel: 'Close',
+                              subText: 'Are you sure you want to delete this?'
+                            },
+        modalProps        = {
+                              isBlocking: false,
+                              styles: { main: { maxWidth: 450 } },
+                            };
+
   // Output arrays
   let outputSuperTypes = [],
       outputSubTypes   = [],
@@ -143,7 +170,6 @@ export default function TypeDefDetails(props) {
     });
   }
 
-
   // Handle clicking clone
   const handleCloneClick = (typeDef, e) => {
     e.preventDefault();
@@ -163,6 +189,61 @@ export default function TypeDefDetails(props) {
     }
   }
   */
+
+  // Handle clicking delete
+  async function handleDeleteClick(guid, e) {
+    e.preventDefault();
+    toggleHideDialog();
+    setIsDeleting(true);
+    setDeleteMsg('Deleting...');
+
+    if (guid) {
+      const apiUrl = `/api/purview/typedefs?guid=${guid}`,
+            fetchOptions = {
+              method: "DELETE",
+              headers: {
+                "Content-Type":"application/json",
+                "Authorization": `Bearer ${aadToken}`
+              }
+            };
+      console.log(`### FETCH: DELETE ${apiUrl}`);
+      
+      // DELETE to Purview API
+      await fetch(apiUrl, fetchOptions)
+        .then(response => response.json()) 
+        .then(json => {
+          setIsDeleting(false);
+          
+          // SUCCESSFUL DELETE to Purview API
+          if (json && json.status === 200) {
+            console.log(`### DELETED '${guid}'`);
+            setDeleted(true);
+            setDeleteMsg('Deleted from Purview');
+            // Trigger refresh of Purview API
+            if (setRefresh) setRefresh( new Date().toJSON().replace(/[^0-9]/g, '') );
+          }
+          // API responsed with errors
+          else {
+            setDeleteMsg('Error, check logs');
+          }
+        })
+        // Fetch errors
+        .catch(error => {
+          console.error("Error:", error);
+          setDeleteMsg('Error, check logs');
+          setIsDeleting(false);
+        });
+    }
+  };
+        
+
+  // React Hook: useEffect when typeDef changes
+  useEffect(() => {
+    if (typeDef) {
+      setDeleted(defaultDelState);
+      setDeleteMsg(defaultDelMsg);
+    }
+  }, [typeDef, defaultDelState, defaultDelMsg]);
 
   // React Hook: useEffect when blobPath changes
   useEffect(() => {
@@ -291,6 +372,30 @@ export default function TypeDefDetails(props) {
         </div>
 
         <Code header="JSON" block={typeDef} />
+
+        <DefaultButton
+          text={deleteMsg}
+          disabled={(deleted) ? deleted : isDeleting}
+          onClick={toggleHideDialog}
+          className={(deleted) ? "button--critical" : "button--delete"}
+        />
+
+        <Dialog
+          hidden={hideDialog}
+          onDismiss={toggleHideDialog}
+          dialogContentProps={dialogContentProps}
+          modalProps={modalProps}
+        >
+          <DialogFooter>
+            <PrimaryButton
+              text={deleteMsg}
+              disabled={isDeleting}
+              onClick={(e) => handleDeleteClick(typeDef.guid, e)}
+              className="button--critical"
+            />
+            <DefaultButton onClick={toggleHideDialog} text="Cancel" />
+          </DialogFooter>
+        </Dialog>
       </div>
     </>
   );

@@ -132,6 +132,11 @@ input[type=text] {
 .form_group--extra { margin-bottom: 2em; }
 .form_label { font-size: 0.85em; }
 
+.button--delete {
+  color: #c00;
+}
+.button--critical,
+.button--critical:hover,
 .button--delete:hover {
   border: 1px solid #600;
   background-color: #c00;

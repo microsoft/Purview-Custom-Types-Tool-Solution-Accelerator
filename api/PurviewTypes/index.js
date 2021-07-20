@@ -82,6 +82,21 @@ module.exports = async function (context, req) {
         }
         break;
       
+      case "DELETE":
+        if (reqQueryGuid) {
+          const result = await purviewHelper.deleteTypeDefByGuid(token, reqQueryGuid),
+                status = result && result.status || 500,
+                statusText = result && result.statusText || 'Error: Invalid response from typedef delete';
+          
+          httpStatus  = (status === 204) ? 200 : status;
+          contentBody = statusText;
+        }
+        else {
+          httpStatus  = 500;
+          contentBody = 'Error: No guid defined';
+        }
+      break;
+      
       default:
         break;
     }

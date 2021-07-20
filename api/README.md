@@ -10,6 +10,7 @@
     "relationshipDefs: [],
   }
   ```
+- DELETE http://localhost:7071/api/purview/typedefs?guid={guid}
 
 #### Local API for Storage Containers
 - GET [http://localhost:7071/api/storage/containers](http://localhost:7071/api/storage/containers)
@@ -29,8 +30,3 @@
       "blob": "test.json",
       "content": "{\"key\":\"value\"}"
   }
-  ```
-
-## Notes
-- The REST APIs for updating and deleting have been intentionally excluded to avoid any accidental data changes.
-- The app writes new JSON blobs using a timestamp to avoid overwriting any existing blobs.
