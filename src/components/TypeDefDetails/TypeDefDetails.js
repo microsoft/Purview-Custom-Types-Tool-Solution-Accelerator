@@ -59,6 +59,8 @@ export default function TypeDefDetails(props) {
         aadToken                    = useAadToken(), // AAD token from React context
         useTypeDefsArray            = useTypeDefs(), // TypeDefs context
         setRefresh                  = (useTypeDefsArray && useTypeDefsArray[1]) || null,
+        createdBy                   = (typeDef && typeDef.createdBy) || null,
+        createdByAdmin              = (createdBy && (createdBy === 'admin' || createdBy === 'ServiceAdmin')) ? true : false,
         defaultDelState             = false,
         defaultDelMsg               = 'Delete',
         [deleted,    setDeleted]    = useState(defaultDelState),
@@ -372,30 +374,34 @@ export default function TypeDefDetails(props) {
         </div>
 
         <Code header="JSON" block={typeDef} />
+        {(!createdByAdmin)
+            ? <>
+                <DefaultButton
+                  text={deleteMsg}
+                  disabled={(deleted) ? deleted : isDeleting}
+                  onClick={toggleHideDialog}
+                  className={(deleted) ? "button--critical" : "button--delete"}
+                />
 
-        <DefaultButton
-          text={deleteMsg}
-          disabled={(deleted) ? deleted : isDeleting}
-          onClick={toggleHideDialog}
-          className={(deleted) ? "button--critical" : "button--delete"}
-        />
-
-        <Dialog
-          hidden={hideDialog}
-          onDismiss={toggleHideDialog}
-          dialogContentProps={dialogContentProps}
-          modalProps={modalProps}
-        >
-          <DialogFooter>
-            <PrimaryButton
-              text={deleteMsg}
-              disabled={isDeleting}
-              onClick={(e) => handleDeleteClick(typeDef.guid, e)}
-              className="button--critical"
-            />
-            <DefaultButton onClick={toggleHideDialog} text="Cancel" />
-          </DialogFooter>
-        </Dialog>
+                <Dialog
+                  hidden={hideDialog}
+                  onDismiss={toggleHideDialog}
+                  dialogContentProps={dialogContentProps}
+                  modalProps={modalProps}
+                >
+                  <DialogFooter>
+                    <PrimaryButton
+                      text={deleteMsg}
+                      disabled={isDeleting}
+                      onClick={(e) => handleDeleteClick(typeDef.guid, e)}
+                      className="button--critical"
+                    />
+                    <DefaultButton onClick={toggleHideDialog} text="Cancel" />
+                  </DialogFooter>
+                </Dialog>
+              </>
+            : null
+        }
       </div>
     </>
   );
