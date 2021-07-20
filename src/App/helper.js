@@ -1,7 +1,5 @@
-/*!
- * Copyright (c) Microsoft Corporation and contributors. All rights reserved.
- * Licensed under the MIT License.
- */
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 
 // Fetch user authentication API & set user state
 export async function fetchAuth(callback) {

@@ -1,3 +1,5 @@
+/* Copyright (c) Microsoft Corporation.
+   Licensed under the MIT License. */
 .servicetype_container {
   display: grid;
   grid-template-columns: max-content auto;
