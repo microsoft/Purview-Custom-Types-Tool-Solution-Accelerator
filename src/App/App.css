@@ -132,6 +132,9 @@ input[type=text] {
 .form_group--extra { margin-bottom: 2em; }
 .form_label { font-size: 0.85em; }
 
+.button--fullwidth {
+  width: 100%;
+}
 .button--delete {
   color: #c00;
 }

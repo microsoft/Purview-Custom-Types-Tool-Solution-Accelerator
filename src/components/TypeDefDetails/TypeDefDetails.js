@@ -380,7 +380,7 @@ export default function TypeDefDetails(props) {
                   text={deleteMsg}
                   disabled={(deleted) ? deleted : isDeleting}
                   onClick={toggleHideDialog}
-                  className={(deleted) ? "button--critical" : "button--delete"}
+                  className={`button--fullwidth ${(deleted) ? "button--critical" : "button--delete"}`}
                 />
 
                 <Dialog
