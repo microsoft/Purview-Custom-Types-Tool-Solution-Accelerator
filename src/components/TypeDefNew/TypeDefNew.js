@@ -119,17 +119,16 @@ export default function TypeDefNew(props) {
         myServiceTypes         = (typeDefs && typeDefs.myServiceTypes) || null,
         myServiceTypeNames     = (myServiceTypes && myServiceTypes.names) || [],
         myServiceTypesList     = (myServiceTypes && myServiceTypes.serviceTypes) || null,
-        thisServiceType        = (propsServiceType && myServiceTypesList && myServiceTypesList[propsServiceType]) || null,
-        thisServiceEntityDefs  = (thisServiceType && thisServiceType.entityDefs) || null,
-        thisServiceEntityNames = (thisServiceEntityDefs && thisServiceEntityDefs.names) || null,
         
         // Vars for new service type
         valueOfNew = 'new',
         [showServType,      setShowServType]      = useState(true),
         [showServTypeInput, setShowServTypeInput] = useState(false),
+        [superTypeOptions,  setSuperTypeOptions]  = useState([]),
+        [endDefTypeOptions, setEndDefTypeOptions] = useState([]),
 
         // React form state for common typedef fields
-        [formServType,      setFormServType]      = useState((!createdByAdmin && typeDef && typeDef.serviceType) || ''),
+        [formServType,      setFormServType]      = useState((!createdByAdmin && typeDef && typeDef.serviceType) || propsServiceType),
         [formServTypeInput, setFormServTypeInput] = useState(''),
 
         [formName,     setFormName]         = useState((typeDef && typeDef.name && `${typeDef.name}_copy`) || ''),
@@ -162,7 +161,7 @@ export default function TypeDefNew(props) {
 
         // Status messages
         [msgPurview, setMsgPurview]     = useState();
-  
+
   // Build array of select options
   let serviceTypeOptions = [];
   if (myServiceTypeNames && Array.isArray(myServiceTypeNames) && myServiceTypeNames.length > 0) {
@@ -182,22 +181,6 @@ export default function TypeDefNew(props) {
     serviceTypeOptions.push({
       key: valueOfNew,
       text: "+ Create New Service Type"
-    });
-  }
-
-  // Loop service type's names to build options
-  let endDefTypeOptions= [],
-      superTypeOptions= [
-        { key: "header1", text:"Core", itemType: DropdownMenuItemType.Header},
-        { key: "Asset",   text: "Asset" },
-        { key: "DataSet", text: "DataSet" },
-        { key: "Process", text: "Process" },
-        { key: "header2", text:"Custom", itemType: DropdownMenuItemType.Header}
-      ];
-  if (thisServiceEntityNames && Array.isArray(thisServiceEntityNames) && thisServiceEntityNames.length > 0) {
-    thisServiceEntityNames.forEach((name,i) => {
-      endDefTypeOptions.push( { key:name, text:name } );
-      superTypeOptions.push( { key:name, text:name } );
     });
   }
 
@@ -442,6 +425,31 @@ export default function TypeDefNew(props) {
     }
   }, [newTypeDef, newTypeDefName]);
 
+  // React Hooks: useEffect when service type changes
+  useEffect(() => {
+    const thisServiceType        = (myServiceTypesList && myServiceTypesList[formServType]) || null,
+          thisServiceEntityDefs  = (thisServiceType && thisServiceType.entityDefs) || null,
+          thisServiceEntityNames = (thisServiceEntityDefs && thisServiceEntityDefs.names) || null;
+
+    // Loop service type's names to build options
+    let newEndDefTypeOptions= [],
+        newSuperTypeOptions= [
+          { key: "header1", text:"Core", itemType: DropdownMenuItemType.Header},
+          { key: "Asset",   text: "Asset" },
+          { key: "DataSet", text: "DataSet" },
+          { key: "Process", text: "Process" },
+          { key: "header2", text:"Custom", itemType: DropdownMenuItemType.Header}
+        ];
+    if (thisServiceEntityNames && Array.isArray(thisServiceEntityNames) && thisServiceEntityNames.length > 0) {
+      thisServiceEntityNames.forEach((name,i) => {
+        newSuperTypeOptions.push( { key:name, text:name } );
+        newEndDefTypeOptions.push( { key:name, text:name } );
+      });
+    }
+    setSuperTypeOptions(newSuperTypeOptions);
+    setEndDefTypeOptions(newEndDefTypeOptions);
+  }, [formCategory, formServType, myServiceTypesList]);
+
   return(
     <div>
       {msgPurview}
@@ -449,7 +457,7 @@ export default function TypeDefNew(props) {
       <h1 className="title">New Type Definition</h1>
       {(typeDef)
         ? null
-        : <><div className="muted"><i>in the &quot;{propsServiceType}&quot; service type</i></div><br /></>
+        : <><div className="muted"><i>in the &quot;{formServType}&quot; service type</i></div><br /></>
       }
 
       <form onSubmit={handleSubmit}>
