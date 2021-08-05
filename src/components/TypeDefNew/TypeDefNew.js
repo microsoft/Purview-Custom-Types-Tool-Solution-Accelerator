@@ -16,12 +16,12 @@ import FormSubmit          from '../FormSubmit/FormSubmit';
 import './TypeDefNew.css';
 
 // Fluent UI
-import { Label }       from '@fluentui/react/lib/Label';
-import { TextField }   from '@fluentui/react/lib/TextField';
-import { ChoiceGroup } from '@fluentui/react/lib/ChoiceGroup';
+import { Label }         from '@fluentui/react/lib/Label';
+import { TextField }     from '@fluentui/react/lib/TextField';
+import { ChoiceGroup }   from '@fluentui/react/lib/ChoiceGroup';
+import { ActionButton }  from '@fluentui/react/lib/Button';
 import { Dropdown, DropdownMenuItemType } from '@fluentui/react/lib/Dropdown';
-
-import { MessageBar, MessageBarType } from '@fluentui/react';
+import { MessageBar, MessageBarType }     from '@fluentui/react';
 
 export default function TypeDefNew(props) {
 
@@ -51,11 +51,13 @@ export default function TypeDefNew(props) {
   }
 
   // Prop service name
-  const serviceTypeName     = (props && props.serviceTypeName) || null,
+  const propsServiceType       = (props && props.serviceTypeName) || null,
         
         // Prop typeDef used for cloning values
         typeDef                = (props && props.typeDef) || null,
         typeDefCategory        = (typeDef && typeDef.category) || 'ENTITY',
+        typeDefCreator         = (typeDef && typeDef.createdBy) || null,
+        createdByAdmin         = (typeDefCreator && (typeDefCreator === 'admin' || typeDefCreator === 'ServiceAdmin')) ? true : false,
         typeDefSuperTypesArray = (typeDef && typeDef.superTypes) || null,
         typeDefSuperType       = (
                                     typeDefSuperTypesArray
@@ -117,12 +119,18 @@ export default function TypeDefNew(props) {
         myServiceTypes         = (typeDefs && typeDefs.myServiceTypes) || null,
         myServiceTypeNames     = (myServiceTypes && myServiceTypes.names) || [],
         myServiceTypesList     = (myServiceTypes && myServiceTypes.serviceTypes) || null,
-        thisServiceType        = (myServiceTypesList && myServiceTypesList[serviceTypeName]) || null,
+        thisServiceType        = (propsServiceType && myServiceTypesList && myServiceTypesList[propsServiceType]) || null,
         thisServiceEntityDefs  = (thisServiceType && thisServiceType.entityDefs) || null,
         thisServiceEntityNames = (thisServiceEntityDefs && thisServiceEntityDefs.names) || null,
         
+        // Vars for new service type
+        valueOfNew = 'new',
+        [showServType,      setShowServType]      = useState(true),
+        [showServTypeInput, setShowServTypeInput] = useState(false),
+
         // React form state for common typedef fields
-        [formServType,  setFormServType]    = useState((typeDef && typeDef.serviceType) || serviceTypeName),
+        [formServType,      setFormServType]      = useState((!createdByAdmin && typeDef && typeDef.serviceType) || ''),
+        [formServTypeInput, setFormServTypeInput] = useState(''),
 
         [formName,     setFormName]         = useState((typeDef && typeDef.name && `${typeDef.name}_copy`) || ''),
         [formCategory, setCategory]         = useState(typeDefCategory),
@@ -163,9 +171,20 @@ export default function TypeDefNew(props) {
         key:  name,
         text: name
       });
+    });    
+  }
+  if (formCategory !== 'RELATIONSHIP') {
+    serviceTypeOptions.push({
+      key: "moreHeader",
+      text: "More Actions",
+      itemType: DropdownMenuItemType.Header
+    });
+    serviceTypeOptions.push({
+      key: valueOfNew,
+      text: "+ Create New Service Type"
     });
   }
-  
+
   // Loop service type's names to build options
   let endDefTypeOptions= [],
       superTypeOptions= [
@@ -214,6 +233,35 @@ export default function TypeDefNew(props) {
     const itemId = (item && item.id) || null,
           value  = (itemId && String(itemId).toUpperCase()) || '';
     setCategory(value);
+    if (value === 'RELATIONSHIP') {
+      setShowServTypeInput(false);
+      setShowServType(true);
+    }
+  }
+
+  // Handle service type choice group
+  const handleServiceType = (key) => {
+    if (key === valueOfNew) {
+      setShowServType(false);
+      setShowServTypeInput(true);
+    }
+    else {
+      setFormServType(key);
+    }
+  }
+
+  // Handle service type input
+  function handleServiceTypeInput(e) {
+    const target = (e && e.target),
+          value  = (target && target.value) || '';
+    setFormServTypeInput(value); // input form field
+    setFormServType(value); // select value used in typedef object
+  }
+
+  // Cancel service type input
+  function cancelServiceTypeInput() {
+    setShowServTypeInput(false);
+    setShowServType(true);
   }
 
   // Handle EndDef Change
@@ -249,12 +297,20 @@ export default function TypeDefNew(props) {
   async function handleSubmit(e) {
     e.preventDefault();
     
+    // Handle new service types
+    if (formServType === "new" && formServTypeInput) {
+        setFormServType(formServTypeInput);
+    }
+
     // Validation
     if (!aadToken) {
       setMsgPurview(<MessageBar messageBarType={MessageBarType.error}><strong>Auth Error:</strong> Azure AAD token is required</MessageBar>);
     }
     else if (formServType === "") {
       setMsgPurview(<MessageBar messageBarType={MessageBarType.error}><strong>Purview Error:</strong> Service type is required</MessageBar>);
+    }
+    else if (formServType === "new" && formServTypeInput === "") {
+      setMsgPurview(<MessageBar messageBarType={MessageBarType.error}><strong>Purview Error:</strong> New service type name is required</MessageBar>);
     }
     else if (formName === "") {
       setMsgPurview(<MessageBar messageBarType={MessageBarType.error}><strong>Purview Error:</strong> Name field is required</MessageBar>);
@@ -393,7 +449,7 @@ export default function TypeDefNew(props) {
       <h1 className="title">New Type Definition</h1>
       {(typeDef)
         ? null
-        : <><div className="muted"><i>in the &quot;{serviceTypeName}&quot; service type</i></div><br /></>
+        : <><div className="muted"><i>in the &quot;{propsServiceType}&quot; service type</i></div><br /></>
       }
 
       <form onSubmit={handleSubmit}>
@@ -410,15 +466,32 @@ export default function TypeDefNew(props) {
         </div>
 
 
-        {(typeDef)
+        {(showServType && typeDef)
           ? <div className="form_group">
               <Label required>Service Type</Label>
               <Dropdown
                 placeholder="Select..."
                 options={serviceTypeOptions}
                 selectedKey={formServType}
-                onChange={(event, item) => { setFormServType(item && item.key); }}
+                onChange={(event, item) => { handleServiceType(item && item.key); }}
               />
+            </div>
+          : null
+        }
+
+        {(showServTypeInput)
+          ? <div className="form_group">
+              <Label required>New Service Type Name:</Label>
+              <div className="new_servicetype">
+                <TextField value={formServTypeInput} onChange={handleServiceTypeInput} className="new_servicetype_input" />
+                <ActionButton
+                  iconProps={{iconName: 'Cancel'}} allowDisabledFocus disabled={false} checked={false}
+                  onClick={() => cancelServiceTypeInput()}
+                  className="new_servicetype"
+                >
+                  Cancel
+                </ActionButton>
+              </div>
             </div>
           : null
         }

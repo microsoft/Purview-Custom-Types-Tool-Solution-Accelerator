@@ -10,3 +10,14 @@
 .enddef_select {
   width: 10em;
 }
+
+.new_servicetype {
+  display: flex;
+}
+.new_servicetype_input {
+  flex: 2;
+}
+.new_servicetype_cancel {
+  flex: 1;
+  max-width: 7em;
+}
