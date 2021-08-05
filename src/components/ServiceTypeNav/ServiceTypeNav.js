@@ -25,7 +25,7 @@ export default function ServiceTypeNav(props) {
         IconCaretClosed   = () => <Icon iconName="CaretSolidRight" className="typedef_category_icon typedef_category_icon--closed" />,
 
         // React State
-        [activeCat,     setActiveCat]     = useState('entityDefs'),
+        [activeCat,     setActiveCat]     = useState( (serviceTypeName !== 'All') ? 'entityDefs' : null ),
         [activeTypeDef, setActiveTypeDef] = useState();
 
   // Handle clicking new entity button
