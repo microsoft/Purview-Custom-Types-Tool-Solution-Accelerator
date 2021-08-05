@@ -9,6 +9,7 @@
 .select_servicetype_image {
   padding: 0 3em;
   text-align: right;
+  min-width: 39em;
 }
 .select_servicetype_image img { max-width: 635px; }
 
