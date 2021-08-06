@@ -118,7 +118,7 @@ export default function ServiceTypeNav(props) {
   }
   else {
     output.push(
-      <div className="typedef_new">
+      <div key="no-items" className="typedef_new">
         <div><img alt="No items" className="typedef_list_empty" key="typedef_list_empty" src="/assets/images/icon-empty-items.svg" /></div>
       </div>
     )
@@ -126,7 +126,7 @@ export default function ServiceTypeNav(props) {
   
   return(
     <>
-      {(serviceTypeName !== '-' && serviceTypeName !== 'All')
+      {(serviceTypeName !== '-Uncategorized' && serviceTypeName !== 'All')
         ?  <div className="typedef_new" role="navigation">
             <DefaultButton
               className="typedef_new_button"

@@ -19,6 +19,7 @@ import { Icon } from '@fluentui/react/lib/Icon';
 export default function ServiceType(props) {
   const newValue              = 'new',
         allValue              = 'All',
+        uncatValue            = '-Uncategorized',
         propsServiceTypeName  = (props && props.serviceTypeName) || null,
         propsNewName          = (props && props.newName) || null,
 
@@ -60,9 +61,9 @@ export default function ServiceType(props) {
       output =  <>
                   <div className="servicetype_header">
                     <ServiceIcon />
-                    <h1 className="title">{(serviceTypeName === '-') ? 'Uncategorized' : serviceTypeName}</h1>
+                    <h1 className="title">{(serviceTypeName === uncatValue) ? 'Uncategorized' : serviceTypeName}</h1>
                   </div>
-                  {(serviceTypeName==='-' || serviceTypeName===allValue)
+                  {(serviceTypeName===uncatValue || serviceTypeName===allValue)
                     ? <><p>Select a type definition from the list.</p><p>OR</p><p>Go back to select a service type before creating new typedefs.</p></>
                     : <p>Select or create a type definition from the list.</p>
                   }

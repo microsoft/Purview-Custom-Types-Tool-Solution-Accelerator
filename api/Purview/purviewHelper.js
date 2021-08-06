@@ -102,7 +102,7 @@ async function processApiTypes(apiTypes) {
         // Loop typedefs within category
         catArray.forEach((catTypeDef, iCatTypeDef) => {
           const typeName        = (catTypeDef && catTypeDef.name) || null,
-                serviceType     = (catTypeDef && catTypeDef.serviceType) || '-',
+                serviceType     = (catTypeDef && catTypeDef.serviceType) || '-Uncategorized',
                 createdBy       = (catTypeDef && catTypeDef.createdBy) || null,
                 createdByAdmin  = (createdBy && (createdBy === 'admin' || createdBy === 'ServiceAdmin')) ? true : false,
                 serviceExists   = (serviceType && myServiceTypeNames.indexOf(serviceType) === -1) ? false : true;
@@ -234,9 +234,13 @@ async function postTypeDefs(token, typedefs) {
 }
 
 // DELETE Type Def by GUID
-async function deleteTypeDefByGuid(token, guid) {
+async function deleteTypeDefByGuid(token, guid, category) {
   const apiUrl        = (token && `${apiPrefix}/atlas/v2/types/typedefs`) || null,
-        delBody       = apiUrl && guid && { entityDefs: [ {guid: guid} ] },
+        delBody       = apiUrl && guid && category && (
+                          (category.toLowerCase()==='relationship')
+                            ? { relationshipDefs: [ {guid: guid} ] }
+                            : { entityDefs: [ {guid: guid} ] }
+                        ),
         fetchOptions  = delBody && {
                           method:  'DELETE',
                           body:    JSON.stringify(delBody),

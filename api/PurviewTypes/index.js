@@ -14,6 +14,7 @@ module.exports = async function (context, req) {
         // Request Query
         reqQuery     = (req && req.query) || null,
         reqQueryGuid = (reqQuery && reqQuery.guid) || null,
+        reqQueryCat  = (reqQuery && reqQuery.category) || null,
 
         // Request Body
         reqBody      = req && req.body || null;
@@ -83,8 +84,8 @@ module.exports = async function (context, req) {
         break;
       
       case "DELETE":
-        if (reqQueryGuid) {
-          const result = await purviewHelper.deleteTypeDefByGuid(token, reqQueryGuid),
+        if (reqQueryGuid && reqQueryCat) {
+                result = await purviewHelper.deleteTypeDefByGuid(token, reqQueryGuid, reqQueryCat),
                 status = result && result.status || 500,
                 statusText = result && result.statusText || 'Error: Invalid response from typedef delete';
           

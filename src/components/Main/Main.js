@@ -62,7 +62,7 @@ export default function Main() {
       }
       else if (viewServiceType) {
         breadcrumbs.push( breadcrumbArrow(1) );
-        breadcrumbs.push((viewServiceType === '-') ? 'Uncategorized' : viewServiceType);
+        breadcrumbs.push(viewServiceType);
       }
       output = <ServiceType serviceTypeName={viewServiceType} newName={viewName}  />
       break;

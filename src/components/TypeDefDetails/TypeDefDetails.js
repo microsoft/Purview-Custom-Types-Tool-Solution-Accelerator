@@ -193,14 +193,17 @@ export default function TypeDefDetails(props) {
   */
 
   // Handle clicking delete
-  async function handleDeleteClick(guid, e) {
+  async function handleDeleteClick(typeDef, e) {
     e.preventDefault();
     toggleHideDialog();
     setIsDeleting(true);
     setDeleteMsg('Deleting...');
 
-    if (guid) {
-      const apiUrl = `/api/purview/typedefs?guid=${guid}`,
+    const guid = (typeDef && typeDef.guid) || null,
+          category = (typeDef && typeDef.category) || null;
+
+    if (guid && category) {
+      const apiUrl = `/api/purview/typedefs?guid=${guid}&category=${category.toLowerCase()}`,
             fetchOptions = {
               method: "DELETE",
               headers: {
@@ -393,7 +396,7 @@ export default function TypeDefDetails(props) {
                     <PrimaryButton
                       text={deleteMsg}
                       disabled={isDeleting}
-                      onClick={(e) => handleDeleteClick(typeDef.guid, e)}
+                      onClick={(e) => handleDeleteClick(typeDef, e)}
                       className="button--critical"
                     />
                     <DefaultButton onClick={toggleHideDialog} text="Cancel" />
