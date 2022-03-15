@@ -72,6 +72,7 @@ This application can be deployed in various ways to meet your needs. Because the
     - App location = `/`
     - Api location = `/api`
     - Output location = `build`
+1. Click on 'Review + create' to create the Static Web App
 
 1. Once the resource is created, it will automatically deploy your app to a URL listed in the Azure portal.
 
