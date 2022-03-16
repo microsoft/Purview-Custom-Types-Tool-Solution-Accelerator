@@ -1,3 +1,10 @@
+---
+page_type: sample
+languages:
+- javascript
+products:
+- azure-purview
+---
 ![Azure Purview Custom Types Tool](./public/assets/images/repo-header.png)
 
 # About this repository
