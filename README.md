@@ -7,7 +7,9 @@ products:
 ---
 ![Azure Purview Custom Types Tool](./public/assets/images/repo-header.png)
 
-# About this repository
+# Azure Purview Custom Types Tool
+
+## About this repository
 The Purview Custom Types Tool is a solution accelerator for supporting custom connectors in [Azure Purview](https://azure.microsoft.com/en-us/services/purview/), which is a unified data governance service that helps you manage and govern your on-premises, multicloud, and software-as-a-service (SaaS) data.
 
 This application supports the following actions:
@@ -19,7 +21,7 @@ When combined with the [Purview Custom Connector Solution Accelerator](https://g
 
 ![Customer/Partner Journey](./public/assets/images/repo-journey.png)
 
-# Prerequisites
+## Prerequisites
 
 - [Azure subscription](https://azure.microsoft.com/free/)
 - [Azure Purview](https://azure.microsoft.com/en-us/services/purview/)
@@ -27,7 +29,7 @@ When combined with the [Purview Custom Connector Solution Accelerator](https://g
     - [Node.js](https://nodejs.org/)
     - [Azure Function Core Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=linux,csharp,bash)
 
-# Deployment
+## Deployment
 This application can be deployed in various ways to meet your needs. Because the creation of type definitions is often limited to a few individuals for a limited time period, this repo is built to run locally by default.
 
 1. [Local PC](#local-setup) - default, ready for local setup below
@@ -35,7 +37,7 @@ This application can be deployed in various ways to meet your needs. Because the
 1. [Azure](#deploy-to-azure) - using Static Web Apps and Functions
 
 
-# Local Setup
+## Local Setup
 
 1. Clone or download this repository and navigate to the project's root directory
 1. [Follow these instructions](https://docs.microsoft.com/en-us/azure/purview/tutorial-using-rest-apis#create-a-service-principal-application) to create an application service principal that can access the Azure Purview API
@@ -52,7 +54,7 @@ This application can be deployed in various ways to meet your needs. Because the
    ```
 
 
-# Run the App Locally
+## Run the App Locally
 
 1. Start the application API from a new terminal:
    ```bash
@@ -67,7 +69,7 @@ This application can be deployed in various ways to meet your needs. Because the
     ```
     App now running at [http://localhost:3000/](http://localhost:3000/). Note the `package.json` file has a proxy for port 7071 so you can code directly to the `/api` path on localhost. For more information on the local Azure Functions, see the [API README](./api/).
 
-# Deploy to Azure
+## Deploy to Azure
 1. Click the button below to create an Azure Static Web App using your GitHub repository:
 
     [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/?feature.customportal=false#create/Microsoft.StaticApp)
@@ -98,7 +100,7 @@ This application can be deployed in various ways to meet your needs. Because the
 1. Due to the two methods of [API support in Azure Static Web Apps with Azure Functions](https://docs.microsoft.com/en-us/azure/static-web-apps/apis), you need to manually create an Azure Function for the `/api/AadToken` endpoint. For more information, please follow the [Getting started with Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-get-started?pivots=programming-language-javascript) and learn how to [Bring your own functions to Azure Static Web Apps](https://docs.microsoft.com/en-us/azure/static-web-apps/functions-bring-your-own).
 
 
-# Learn More
+## Learn More
 
 **Azure Purview**
 - [Purview Custom Connector Solution Accelerator](https://github.com/microsoft/Purview-Custom-Connector-Solution-Accelerator)
