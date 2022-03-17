@@ -8,8 +8,6 @@ products:
 ![Azure Purview Custom Types Tool](./public/assets/images/repo-header.png)
 
 # Azure Purview Custom Types Tool
-
-## About this repository
 The Purview Custom Types Tool is a solution accelerator for supporting custom connectors in [Azure Purview](https://azure.microsoft.com/en-us/services/purview/), which is a unified data governance service that helps you manage and govern your on-premises, multicloud, and software-as-a-service (SaaS) data.
 
 This application supports the following actions:
