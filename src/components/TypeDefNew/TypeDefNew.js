@@ -199,7 +199,7 @@ export default function TypeDefNew(props) {
       ogArray.forEach((obj,i) => {
         const objName = (obj && obj.name) || null,
               objCardinality = (obj && obj.cardinality) || null,
-              objTypeName = (obj && obj.typeName) || null;
+              objTypeName = (obj && obj.typeName) || '';
         // Attributes for entity & relationship typedefs, only add named attrs
         if (objName && objName !== "") {
           // Reformat typeName value for SET cardinality to be "array<value>"
