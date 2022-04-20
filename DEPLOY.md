@@ -40,7 +40,7 @@
 
 1. Copy the Function URL from VS Code or Azure Portal (including a key that adds code param) and open in a browser to confirm a succesful response from the AAD Token API.
 
-1. When a token is successfully returned from the API, override the `fetchToken()` reference to `apiUrl` within [src/App/helper.js](https://github.com/microsoft/Purview-Custom-Types-Tool-Solution-Accelerator/blob/main/src/App/helper.js#L26) using your new Function URL.
+1. When a token is successfully returned from the API, override the `fetchToken()` reference to `apiUrl` within [src/App/helper.js](https://github.com/microsoft/Purview-Custom-Types-Tool-Solution-Accelerator/blob/main/src/App/helper.js#L26) using your new Function URL. It will be in this format: `https://APPNAME.azurewebsites.net/api/aad/token?code=DEFAULT_KEY`
 
 1. Push the app change to your code repo and continue to the application setup below.
 
