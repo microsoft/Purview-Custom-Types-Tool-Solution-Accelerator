@@ -8,11 +8,13 @@
 
 ## Notes
 
+*Due to the two methods of [API support in Azure Static Web Apps with Azure Functions](https://docs.microsoft.com/en-us/azure/static-web-apps/apis), we will need to deploy a separate Azure Function for the `/api/AadToken` endpoint. For more information, please review [how to bring your own functions to Azure Static Web Apps](https://docs.microsoft.com/en-us/azure/static-web-apps/functions-bring-your-own).*
+
 *Due to the [Node dependency management in Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-node#dependency-management), we need to ensure that all dependencies are installed on the Function App in Azure. When deploying Function Apps from source control, any package.json file present in the repo, will trigger an npm install in its folder during deployment. But when deploying via the Portal or CLI, you'll have to manually install the packages.*
 
 *The directions below are for [deploying with dependencies](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-node#deploying-with-dependencies), but you could also [deploy using Kudu](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-node#using-kudu) (Windows Only).*
 
-## Azure Setup
+## Application Setup
 1. Click the button below to create an Azure Static Web App using your GitHub repository:
 
     [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/?feature.customportal=false#create/Microsoft.StaticApp)
@@ -42,8 +44,6 @@
     - [Learn more](https://docs.microsoft.com/en-us/azure/static-web-apps/authentication-authorization) about authentication & authorization
 
 ## Azure Function for the AAD Token
-*Due to the two methods of [API support in Azure Static Web Apps with Azure Functions](https://docs.microsoft.com/en-us/azure/static-web-apps/apis), we will need to deploy a separate Azure Function for the `/api/AadToken` endpoint. For more information, please review [how to bring your own functions to Azure Static Web Apps](https://docs.microsoft.com/en-us/azure/static-web-apps/functions-bring-your-own).*
-
 1. Open an existing function project in VS Code, or create a new folder and open it in a new VS Code window.
 
 1. Click Azure (Shift+Alt+A) > Functions extension > Create Function (lightning+ icon)
