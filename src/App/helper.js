@@ -96,6 +96,7 @@ export async function handleApiTypes(response, callback) {
       .catch(error => console.error('Error:', error));
   }
   else {
-    console.error('Error: API response is not JSON.');
+    console.log('Warning: TypeDef API response is not JSON or null.');
+    callback({});
   }
 }
