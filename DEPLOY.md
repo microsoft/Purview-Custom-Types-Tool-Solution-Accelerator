@@ -61,6 +61,6 @@
     - Generate initation link and copy into a new browser window to consent
     - [Learn more](https://docs.microsoft.com/en-us/azure/static-web-apps/authentication-authorization) about authentication & authorization
 
-    *Note: By default, the [public/routes.json](./public/routes.json) is setup to only allow Azure Active Directory and requires the `admin` role. You can use the app's `/login` to gain initial access. Learn more about [authentication and authorization for Static Web Apps](https://docs.microsoft.com/en-us/azure/static-web-apps/authentication-authorization)
+    *Note: By default, the [public/routes.json](./public/routes.json) is setup to only allow Azure Active Directory and requires the `admin` role. You can use the app's `/login` to gain initial access. Learn more about [authentication and authorization for Static Web Apps](https://docs.microsoft.com/en-us/azure/static-web-apps/authentication-authorization)*
 
 1. Open the Static Web App URL to confirm it is working the same as the [local deployment method](./README.md).
