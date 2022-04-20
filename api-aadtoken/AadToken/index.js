@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 // Helper Function: Get AAD Token
-async function getToken() {
+async function getToken(context) {
   const fetch = (await import('node-fetch')).default;
 
   // Default token is null
@@ -49,7 +49,7 @@ module.exports = async function (context) {
       };
   
   // Get AAD token & set response
-  const tokenResponse = await getToken();
+  const tokenResponse = await getToken(context);
   if (tokenResponse) {
     httpStatus = 200;
     contentBody = tokenResponse;
