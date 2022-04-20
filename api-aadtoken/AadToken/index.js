@@ -1,9 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-const fetch = import("node-fetch");
 
 // Helper Function: Get AAD Token
 async function getToken() {
+  const fetch = (await import('node-fetch')).default;
+
   // Default token is null
   let fetchResponse = null,
       tokenResponse = null;
@@ -30,7 +31,7 @@ async function getToken() {
     // Fetch token here via API with POST options
     fetchResponse = await fetch(aadApi, postOptions);
     if (!fetchResponse.ok) {
-      console.error(`An error has occured: ${fetchResponse.status}`);
+      context.log.error(`An error has occured: ${fetchResponse.status}`);
       return null;
     }
     tokenResponse = await fetchResponse.json();
