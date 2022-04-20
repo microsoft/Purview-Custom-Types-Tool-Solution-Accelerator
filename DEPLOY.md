@@ -12,7 +12,7 @@
 
 *The directions below are for [deploying with dependencies](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-node#deploying-with-dependencies), but you could also [deploy using Kudu](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-node#using-kudu) (Windows Only).*
 
-## App Setup
+## Azure Setup
 1. Click the button below to create an Azure Static Web App using your GitHub repository:
 
     [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/?feature.customportal=false#create/Microsoft.StaticApp)
@@ -41,36 +41,36 @@
     - Generate initation link and copy into a new browser window to consent
     - [Learn more](https://docs.microsoft.com/en-us/azure/static-web-apps/authentication-authorization) about authentication & authorization
 
-1. Create an Azure Function for the AAD Token API
-    *Due to the two methods of [API support in Azure Static Web Apps with Azure Functions](https://docs.microsoft.com/en-us/azure/static-web-apps/apis), we will need to deploy a separate Azure Function for the `/api/AadToken` endpoint. For more information, please review [how to bring your own functions to Azure Static Web Apps](https://docs.microsoft.com/en-us/azure/static-web-apps/functions-bring-your-own).*
+## Azure Function for the AAD Token
+*Due to the two methods of [API support in Azure Static Web Apps with Azure Functions](https://docs.microsoft.com/en-us/azure/static-web-apps/apis), we will need to deploy a separate Azure Function for the `/api/AadToken` endpoint. For more information, please review [how to bring your own functions to Azure Static Web Apps](https://docs.microsoft.com/en-us/azure/static-web-apps/functions-bring-your-own).*
 
-    1. Open an existing function project in VS Code, or create a new folder and open it in a new VS Code window.
+1. Open an existing function project in VS Code, or create a new folder and open it in a new VS Code window.
 
-    1. Click Azure (Shift+Alt+A) > Functions extension > Create Function (lightning+ icon)
-        1. Create new project
-        1. `JavaScript` as the language
-        1. `HTTP Trigger` as the template
-        1. Provide a function name `AadToken`
-        1. `Function` as the authorization level
+1. Click Azure (Shift+Alt+A) > Functions extension > Create Function (lightning+ icon)
+    - Create new project
+    - `JavaScript` as the language
+    - `HTTP Trigger` as the template
+    - Provide a function name `AadToken`
+    - `Function` as the authorization level
 
-    1. Copy the following 3 files from [/api-aadtoken/](./api-aadtoken/) into your function project:
-        - package.json
-        - AadToken/function.json
-        - AadToken/index.js
+1. Copy the following 3 files from [/api-aadtoken/](./api-aadtoken/) into your function project:
+    - package.json
+    - AadToken/function.json
+    - AadToken/index.js
 
-    1. Run `npm install` from the VS Code Terminal to install the [node-fetch](https://www.npmjs.com/package/node-fetch) dependency.
+1. Run `npm install` from the VS Code Terminal to install the [node-fetch](https://www.npmjs.com/package/node-fetch) dependency.
 
-    1. From the Azure Functions extension within VS Code, click `Deploy to Function App` (cloud icon) and select or create a Function App in Azure.
+1. From the Azure Functions extension within VS Code, click `Deploy to Function App` (cloud icon) and select or create a Function App in Azure.
 
-    1. From the Azure Function within Azure Portal, update the `Function Keys` using either the names & values previously pasted into `/api/local.settings.json` or new values for production resources.
-        - AadTenantId
-        - AppClientId
-        - AppClientSecret
+1. From the Azure Function within Azure Portal, update the `Function Keys` using either the names & values previously pasted into `/api/local.settings.json` or new values for production resources.
+    - AadTenantId
+    - AppClientId
+    - AppClientSecret
 
-    1. Copy the Function URL from VS Code or Azure Portal (including a key that adds code param) and open in a browser to confirm a succesful response from the AAD Token API. *You may need to restart the Function app*
+1. Copy the Function URL from VS Code or Azure Portal (including a key that adds code param) and open in a browser to confirm a succesful response from the AAD Token API. *You may need to restart the Function app*
 
-    1. When a token is successfully returned from the API, override the `fetchToken()` reference to `apiUrl` within [src/App/helper.js](https://github.com/microsoft/Purview-Custom-Types-Tool-Solution-Accelerator/blob/main/src/App/helper.js#L26) using your Function URL.
+1. When a token is successfully returned from the API, override the `fetchToken()` reference to `apiUrl` within [src/App/helper.js](https://github.com/microsoft/Purview-Custom-Types-Tool-Solution-Accelerator/blob/main/src/App/helper.js#L26) using your Function URL.
 
-    1. Push the change to your repo to trigger an update of Azure Static Web App. [Learn more about preview environments](https://docs.microsoft.com/en-us/azure/static-web-apps/preview-environments)
+1. Push the change to your repo to trigger an update of Azure Static Web App. [Learn more about preview environments](https://docs.microsoft.com/en-us/azure/static-web-apps/preview-environments)
 
-    The Azure Static Web App should now be working the same as the [local deployment method](./README.md).
+The Azure Static Web App should now be working the same as the [local deployment method](./README.md).
