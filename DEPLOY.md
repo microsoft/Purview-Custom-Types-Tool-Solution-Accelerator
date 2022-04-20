@@ -25,9 +25,9 @@
     - `Function` as the authorization level
 
 1. Copy the following 3 files from [/api-aadtoken/](./api-aadtoken/) into your function project:
-    - package.json
-    - AadToken/function.json
-    - AadToken/index.js
+    - [package.json](./api-aadtoken/package.json)
+    - [AadToken/function.json](./api-aadtoken/AadToken/function.json)
+    - [AadToken/index.js](./api-aadtoken/AadToken/index.js)
 
 1. Run `npm install` from the VS Code Terminal to install the [node-fetch](https://www.npmjs.com/package/node-fetch) dependency.
 
