@@ -32,6 +32,7 @@ async function getToken(context) {
     fetchResponse = await fetch(aadApi, postOptions);
     if (!fetchResponse.ok) {
       context.log.error(`An error has occured: ${fetchResponse.status}`);
+      context.log.error(fetchResponse);
       return null;
     }
     tokenResponse = await fetchResponse.json();
