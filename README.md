@@ -12,7 +12,7 @@ The Purview Custom Types Tool is a solution accelerator for supporting custom co
 
 This application supports the following actions:
 - Browse existing type definitions
-- Create new enity & relationship type definitions
+- Create new entity & relationship type definitions
 - Create entity templates to simplify source scanning
 
 When combined with the [Purview Custom Connector Solution Accelerator](https://github.com/microsoft/Purview-Custom-Connector-Solution-Accelerator), this application provides entity templates to help create source scanning functionality. The diagram below outlines the typical journey to develop a custom connector for Azure Purview:
@@ -68,36 +68,7 @@ This application can be deployed in various ways to meet your needs. Because the
     App now running at [http://localhost:3000/](http://localhost:3000/). Note the `package.json` file has a proxy for port 7071 so you can code directly to the `/api` path on localhost. For more information on the local Azure Functions, see the [API README](./api/).
 
 ## Deploy to Azure
-1. Click the button below to create an Azure Static Web App using your GitHub repository:
-
-    [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/?feature.customportal=false#create/Microsoft.StaticApp)
-
-1. Sign in to GitHub and authorize Azure Static Web Apps
-1. Select your organization, repository, and branch from the dropdowns
-1. Select `React` as the build preset
-1. Update the project structure:
-    - App location = `/`
-    - Api location = `/api`
-    - Output location = `build`
-1. Click on 'Review + create' to create the Static Web App
-
-1. Once the resource is created, it will automatically deploy your app to a URL listed in the Azure portal.
-
-1. Click **Configuration** in the left nav to add the following app settings using either the names & values previously pasted into `/api/local.settings.json` or new values for production resources.
-    - StorageConnectionString
-    - AadTenantId
-    - AppClientId
-    - AppClientSecret
-    - AtlasAccountName
-
-1. Click **Role management** in the left nav and click `Invite`
-    - Add yourself by using AAD and your email address as it appears in AAD
-    - Add the `admin` role to the invite
-    - Generate initation link and copy into a new browser window to consent
-    - [Learn more](https://docs.microsoft.com/en-us/azure/static-web-apps/authentication-authorization) about authentication & authorization
-
-1. Due to the two methods of [API support in Azure Static Web Apps with Azure Functions](https://docs.microsoft.com/en-us/azure/static-web-apps/apis), you need to manually create an Azure Function for the `/api/AadToken` endpoint. For more information, please follow the [Getting started with Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-get-started?pivots=programming-language-javascript) and learn how to [Bring your own functions to Azure Static Web Apps](https://docs.microsoft.com/en-us/azure/static-web-apps/functions-bring-your-own).
-
+Please review the [deployment documentation](./DEPLOY.md) for details. Due to the two methods of [API support in Azure Static Web Apps with Azure Functions](https://docs.microsoft.com/en-us/azure/static-web-apps/apis), you will need to deploy a separate Azure Function for the `/api/AadToken` endpoint.
 
 ## Learn More
 
