@@ -15,19 +15,7 @@
 *The directions below are for deploying with dependencies via VS Code, but you could also [deploy using Kudu](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-node#using-kudu) (on Windows only).*
 
 ## Azure Function for the AAD Token
-1. Create a new folder and open in a new VS Code window.
-
-1. Click Azure (Shift+Alt+A) > Functions extension > Create Function (lightning+ icon)
-    - Create new project or select existing one
-    - `JavaScript` as the language
-    - `HTTP Trigger` as the template
-    - `AadToken` as the function name
-    - `Function` as the authorization level
-
-1. Copy the following 3 files from [/api-aadtoken/](./api-aadtoken/) into your function project:
-    - [package.json](./api-aadtoken/package.json)
-    - [AadToken/function.json](./api-aadtoken/AadToken/function.json)
-    - [AadToken/index.js](./api-aadtoken/AadToken/index.js)
+1. Copy or move the [/api-aadtoken/](./api-aadtoken/) folder out to a new location and open as a new VS Code project.
 
 1. Run `npm install` from the VS Code Terminal to install the [node-fetch](https://www.npmjs.com/package/node-fetch) dependency.
 
@@ -40,7 +28,7 @@
 
 1. Copy the Function URL from VS Code or Azure Portal (including a key that adds code param) and open in a browser to confirm a succesful response from the AAD Token API.
 
-1. When a token is successfully returned from the API, override the `fetchToken()` reference to `apiUrl` within [src/App/helper.js](https://github.com/microsoft/Purview-Custom-Types-Tool-Solution-Accelerator/blob/main/src/App/helper.js#L26) using your new Function URL. It will be in this format: `https://APPNAME.azurewebsites.net/api/aad/token?code=DEFAULT_KEY`
+1. When a token is successfully returned from the API, override the `fetchToken()` reference to `apiUrl` within [src/App/helper.js](./src/App/helper.js#L26) using your new Function URL. It will be in this format: `https://APPNAME.azurewebsites.net/api/aad/token?code=DEFAULT_KEY`
 
 1. Push the app change to your code repo and continue to the application setup below.
 
