@@ -28,7 +28,7 @@
 
 1.  From the Azure Function in Azure Portal, click `CORS` to add `*` to the Allowed Origins.
 
-1. Copy the Function URL from VS Code or Azure Portal (including a key that adds code param) and open in a browser to confirm a succesful response from the AAD Token API.
+1. Copy the Function URL from VS Code or Azure Portal (including a key that adds code param) and open in a browser to confirm a successful response from the AAD Token API.
 
 1. When a token is successfully returned from the API, override the `fetchToken()` reference to `apiUrl` within [src/App/helper.js](./src/App/helper.js#L26) using your new Function URL. It will be in this format: `https://APPNAME.azurewebsites.net/api/aad/token?code=DEFAULT_KEY`
 
@@ -58,7 +58,7 @@
 1. Click **Role management** in the left nav and click `Invite`
     - Add yourself by using AAD and your email address as it appears in AAD
     - Add the `admin` role to the invite
-    - Generate initation link and copy into a new browser window to consent
+    - Generate invitation link and copy into a new browser window to consent
     - [Learn more](https://docs.microsoft.com/en-us/azure/static-web-apps/authentication-authorization) about authentication & authorization
 
     *Note: By default, the [public/routes.json](./public/routes.json) is setup to only allow Azure Active Directory and requires the `admin` role. You can use the app's `/login` to gain initial access. Learn more about [authentication and authorization for Static Web Apps](https://docs.microsoft.com/en-us/azure/static-web-apps/authentication-authorization)*
