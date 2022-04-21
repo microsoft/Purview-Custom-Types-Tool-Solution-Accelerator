@@ -5,24 +5,24 @@ languages:
 products:
 - azure-purview
 ---
-![Azure Purview Custom Types Tool](./public/assets/images/repo-header.png)
+![Microsoft Purview Custom Types Tool](./public/assets/images/repo-header.png)
 
-# Azure Purview Custom Types Tool
-The Purview Custom Types Tool is a solution accelerator for supporting custom connectors in [Azure Purview](https://azure.microsoft.com/en-us/services/purview/), which is a unified data governance service that helps you manage and govern your on-premises, multicloud, and software-as-a-service (SaaS) data.
+# Microsoft Purview Custom Types Tool
+The Purview Custom Types Tool is a solution accelerator for supporting custom connectors in [Microsoft Purview](https://azure.microsoft.com/en-us/services/purview/), which is a unified data governance service that helps you manage and govern your on-premises, multicloud, and software-as-a-service (SaaS) data.
 
 This application supports the following actions:
 - Browse existing type definitions
 - Create new entity & relationship type definitions
 - Create entity templates to simplify source scanning
 
-When combined with the [Purview Custom Connector Solution Accelerator](https://github.com/microsoft/Purview-Custom-Connector-Solution-Accelerator), this application provides entity templates to help create source scanning functionality. The diagram below outlines the typical journey to develop a custom connector for Azure Purview:
+When combined with the [Purview Custom Connector Solution Accelerator](https://github.com/microsoft/Purview-Custom-Connector-Solution-Accelerator), this application provides entity templates to help create source scanning functionality. The diagram below outlines the typical journey to develop a custom connector for Microsoft Purview:
 
 ![Customer/Partner Journey](./public/assets/images/repo-journey.png)
 
 ## Prerequisites
 
 - [Azure subscription](https://azure.microsoft.com/free/)
-- [Azure Purview](https://azure.microsoft.com/en-us/services/purview/)
+- [Microsoft Purview](https://azure.microsoft.com/en-us/services/purview/)
 - Localhost or Windows 365:
     - [Node.js](https://nodejs.org/)
     - [Azure Function Core Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=linux,csharp,bash)
@@ -38,12 +38,12 @@ This application can be deployed in various ways to meet your needs. Because the
 ## Local Setup
 
 1. Clone or download this repository and navigate to the project's root directory
-1. [Follow these instructions](https://docs.microsoft.com/en-us/azure/purview/tutorial-using-rest-apis#create-a-service-principal-application) to create an application service principal that can access the Azure Purview API
+1. [Follow these instructions](https://docs.microsoft.com/en-us/azure/purview/tutorial-using-rest-apis#create-a-service-principal-application) to create an application service principal that can access the Microsoft Purview API
 1. Rename `/api/local.settings.json.rename` to `local.settings.json` by removing `.rename` extension
 1. Edit your `/api/local.settings.json` file:
     * Update `AadTenantId` with your Tenant ID for Azure Active Directory
     * Update `AppClientId` and `AppClientSecret` with your application service principal
-    * Update `AtlasAccountName` with your Azure Purview account name
+    * Update `AtlasAccountName` with your Microsoft Purview account name
     * Update `StorageConnectionString` with your connection string for Azure Data Lake Storage
     * Update `StorageContainer` with your preferred container name
 1. Install the application's dependencies:
@@ -72,7 +72,7 @@ Please review the [deployment documentation](./DEPLOY.md) for details. Due to th
 
 ## Learn More
 
-**Azure Purview**
+**Microsoft Purview**
 - [Purview Custom Connector Solution Accelerator](https://github.com/microsoft/Purview-Custom-Connector-Solution-Accelerator)
 - [Purview Machine Learning Lineage Solution Accelerator](https://github.com/microsoft/Purview-Machine-Learning-Lineage-Solution-Accelerator)
 - [Tutorial using the REST APIs](https://docs.microsoft.com/en-us/azure/purview/tutorial-using-rest-apis)

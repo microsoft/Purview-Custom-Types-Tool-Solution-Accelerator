@@ -2,8 +2,8 @@
 
 ## Prerequisites
 - [Azure subscription](https://azure.microsoft.com/free/)
-- [Azure Purview](https://azure.microsoft.com/en-us/services/purview/)
-- [Service Principal](https://docs.microsoft.com/en-us/azure/purview/tutorial-using-rest-apis#create-a-service-principal-application) that can access the Azure Purview API
+- [Microsoft Purview](https://azure.microsoft.com/en-us/services/purview/)
+- [Service Principal](https://docs.microsoft.com/en-us/azure/purview/tutorial-using-rest-apis#create-a-service-principal-application) that can access the Microsoft Purview API
 - [VS Code](https://code.visualstudio.com/) with [Azure Functions extenstion](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
 
 ## Notes
