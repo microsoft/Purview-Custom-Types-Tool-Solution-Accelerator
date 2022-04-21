@@ -92,7 +92,7 @@ export default function SelectServiceType(props) {
   return (
     <div className="select_servicetype_container">
       <div className="select_servicetype_image">
-        <img src="/assets/images/purview_homepage.svg" alt="Azure Purview" />
+        <img src="/assets/images/purview_homepage.svg" alt="Microsoft Purview" />
       </div>
       <div className="select_servicetype_action">
         <h1 className="title nowrap">Select service type</h1>
