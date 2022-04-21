@@ -31,8 +31,8 @@ export default function AppHeader() {
             userDetails     = (clientPrincipal && clientPrincipal.userDetails) || null,
             outputAnon      = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development')
                                 ? 'Welcome localhost'
-                                : 'Welcome | <a href="/login">Sign In</a>',
-            outputUser      = (userDetails && `Hi ${userDetails} | <a href="/logout">Sign Out</a>`) || null,
+                                : <>Welcome | <a href="/login" className="header_link">Sign In</a></>,
+            outputUser      = (userDetails && <>Hi {userDetails} | <a href="/logout" className="header_link">Sign Out</a></>) || null,
             newOutput          = (userDetails) ? outputUser : outputAnon;
       
       setAuthOutput(newOutput);
