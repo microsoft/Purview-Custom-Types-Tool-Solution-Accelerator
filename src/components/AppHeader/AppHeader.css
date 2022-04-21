@@ -12,9 +12,13 @@
   box-shadow: 0 0.5em 1em 0 rgba(0,0,0,.16);
 }
 
-a.header_title {
-  color:#fff;
+.header_title {
   font-weight: 500;
+}
+
+a.header_title,
+a.header_link {
+  color:#fff;
 }
 
 .header_chevron {
