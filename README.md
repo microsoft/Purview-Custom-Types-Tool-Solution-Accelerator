@@ -70,6 +70,8 @@ This application can be deployed in various ways to meet your needs. Because the
 ## Deploy to Azure
 Please review the [deployment documentation](./DEPLOY.md) for details. Due to the two methods of [API support in Azure Static Web Apps with Azure Functions](https://docs.microsoft.com/en-us/azure/static-web-apps/apis), you will need to deploy a separate Azure Function for the `/api/AadToken` endpoint.
 
+*Please follow additional best practices for [Securing Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/security-concepts) and note the [Security constraints with bringing your own functions to Azure Static Web Apps](https://docs.microsoft.com/en-us/azure/static-web-apps/functions-bring-your-own#security-constraints)*
+
 ## Learn More
 
 **Microsoft Purview**
