@@ -10,7 +10,7 @@ export async function fetchAuth(callback) {
   else {
     let apiUrl = "/.auth/me";
     console.log(`### FETCH: GET ${apiUrl}`);
-    const authResponse = await fetch(apiUrl),
+    const authResponse = await fetch(apiUrl).catch(error => console.error('Error:', error)),
           contentType = authResponse && authResponse.headers.get("content-type");
 
     if (contentType && contentType.indexOf("application/json") !== -1) {
@@ -26,7 +26,7 @@ export async function fetchToken(callback) {
   let apiUrl = "/api/aad/token";
   console.log(`### FETCH: GET ${apiUrl}`);
 
-  const tokenResponse = await fetch(apiUrl),
+  const tokenResponse = await fetch(apiUrl).catch(error => console.error('Error:', error)),
         headers       = tokenResponse && tokenResponse.headers,
         contentType   = headers && headers.get("content-type");
   let tokenAccess = null;
@@ -50,7 +50,7 @@ export async function fetchToken(callback) {
 export async function fetchContainer(callback) {
   let apiUrl = "/api/storage";
   console.log(`### FETCH: GET ${apiUrl}`);
-  const storageResponse = await fetch(apiUrl),
+  const storageResponse = await fetch(apiUrl).catch(error => console.error('Error:', error)),
         contentType = storageResponse && storageResponse.headers.get("content-type");
         
   if (contentType && contentType.indexOf("application/json") !== -1) {
