@@ -3,7 +3,7 @@ page_type: sample
 languages:
 - javascript
 products:
-- azure-purview
+- microsoft-purview
 ---
 ![Microsoft Purview Custom Types Tool](./public/assets/images/repo-header.png)
 
