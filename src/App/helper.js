@@ -15,7 +15,10 @@ export async function fetchAuth(callback) {
 
     if (contentType && contentType.indexOf("application/json") !== -1) {
       await authResponse.json()
-        .then(authResponse => callback(authResponse))
+        .then(authResponse => {
+          console.log('### authResponse:', authResponse);
+          callback(authResponse);
+        })
         .catch(error => console.error('Error:', error));
     }
   }
@@ -36,6 +39,8 @@ export async function fetchToken(callback) {
         const tokenResponseStatus = (tokenResponse && tokenResponse.status) || null,
               tokenResponseData   = (tokenResponseStatus===200 && tokenResponse.data) || null,
               tokenType           = (tokenResponseData && tokenResponseData.token_type) || null;
+        
+        console.log('### tokenResponse:', tokenResponse);
         
         // Set token value
         if (tokenType==='Bearer' && tokenResponseData.access_token) tokenAccess = tokenResponseData.access_token;
