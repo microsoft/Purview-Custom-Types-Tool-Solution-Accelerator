@@ -57,13 +57,13 @@ export async function fetchContainer(callback) {
   console.log(`### FETCH: GET ${apiUrl}`);
   const storageResponse = await fetch(apiUrl).catch(error => console.error('Error:', error)),
         contentType = storageResponse && storageResponse.headers.get("content-type");
-        
+  
   if (contentType && contentType.indexOf("application/json") !== -1) {
     await storageResponse.json()
       .then(storageResponse => {
         const responseStatus = storageResponse && storageResponse.status,
               responseData   = storageResponse && storageResponse.data,
-              container      = responseData && responseData.name;
+              container      = responseData && (responseData.name || responseData._containerName);
         if (responseStatus === 200 && container) {
           callback(container);
           console.log('### container:', container);
@@ -92,10 +92,11 @@ export async function handleApiTypes(response, callback) {
   if (contentType && contentType.indexOf("application/json") !== -1) {
     await response.json()
       .then(response => {
-        const responseStatus = response && response.status;
-        if (responseStatus === 200) {
-          callback(response.data);
-          console.log('### typeDefsObj:', response.data);
+        const responseStatus = (response && response.status) || null,
+              responseData   = (response && response.data) || null;
+        console.log('### typeDefsObj:', responseData);
+        if (responseStatus === 200 && responseData) {
+          callback(responseData);
         }
       })
       .catch(error => console.error('Error:', error));

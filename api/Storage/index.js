@@ -8,14 +8,16 @@ module.exports = async function (context, req) {
     const STORAGE_CONNECTION_STRING = process.env["StorageConnectionString"] || null,
           STORAGE_CONTAINER         = process.env["StorageContainer"] || null,
           blobServiceClient         = STORAGE_CONNECTION_STRING
-                                      && BlobServiceClient.fromConnectionString(STORAGE_CONNECTION_STRING) || null;
-
-    let contentBody = '';
-    let httpStatus = 400;
+                                      && BlobServiceClient.fromConnectionString(STORAGE_CONNECTION_STRING) || null,
+          blobContainers            = (blobServiceClient && await blobServiceClient.listContainers()) || null;
+    
+    let contentBody = { version: "v1.1" },
+        httpStatus  = 400;
 
     context.log(`GET all containers looking for '${STORAGE_CONTAINER}'...`);
     let containerExists = false;
-    for await (const container of blobServiceClient.listContainers()) {
+
+    for await (const container of blobContainers) {
       const containerName = (container && container.name) || null;
       if (containerName === STORAGE_CONTAINER) {
         containerExists = true;
