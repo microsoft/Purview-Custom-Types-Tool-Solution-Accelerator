@@ -19,14 +19,14 @@
 
 1. Run `npm install` from the VS Code Terminal to install the [node-fetch](https://www.npmjs.com/package/node-fetch) dependency.
 
-1. From the Azure Functions extension within VS Code, click **Deploy to Function App** (cloud icon) and select or create a Function App in Azure.
+1. From the Azure Functions extension within VS Code, click **Deploy to Function App** (cloud icon) and select a Function App in Azure. If needed, you can first create a new Azure Function resource within the Azure Portal before deploying from VS Code.
 
-1. From the Azure Function in Azure Portal, click **Configuration** to add the following application settings using either the names & values previously pasted into `/api/local.settings.json` or new values for production resources.
+1. From the Azure Function in Azure Portal, click **Configuration** to add the following application settings using either the names & values previously pasted into `/api/local.settings.json` or new values for production resources. Click **Save** to update your Function App.
     - AadTenantId
     - AppClientId
     - AppClientSecret
 
-1. Copy the Function URL from VS Code or Azure Portal (including a key that adds code param) and open in a browser to confirm a successful response from the AAD Token API. If needed, you can troubleshoot issues in the Portal by browsing to the **Functions** and **Code + Test** to debug logs while making an HTTP request.
+1. Copy the Function URL from VS Code or Azure Portal (including a key that adds code param) and open in a browser to confirm a successful response from the AAD Token API. If needed, you can troubleshoot issues in the Portal by browsing to the **Functions** then **AadToken** for the **Function Keys** as well as **Code + Test** to debug logs while making an HTTP request.
 
 1. When a token is successfully returned from the API, override the `fetchToken()` reference to `apiUrl` within [src/App/helper.js](./src/App/helper.js#L26) using your new Function URL. It will be in this format: `https://APPNAME.azurewebsites.net/api/aad/token?code=DEFAULT_KEY`
 
@@ -62,3 +62,5 @@
 1. Copy the Static Web App URL from the **Overview** page, then go back to the Azure Function and click **CORS** to paste your app URL in the Allowed Origins.
 
 1. Open the Static Web App URL to confirm it is working the same as the [local deployment method](./README.md).
+
+1. See [Troubleshooting](./TROUBLESHOOTING.md) doc for more help or [file a new issue](https://github.com/microsoft/Purview-Custom-Types-Tool-Solution-Accelerator/issues).
