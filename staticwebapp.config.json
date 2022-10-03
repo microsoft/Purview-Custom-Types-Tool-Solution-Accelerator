@@ -1,0 +1,36 @@
+{
+  "trailingSlash": "auto",
+  
+  "routes": [
+    { "route": "/logout", "rewrite": "/.auth/logout" },
+    { "route": "/login",  "rewrite": "/.auth/login/aad" },
+    { "route": "/.auth/login/github",   "statusCode": 404 },
+    { "route": "/.auth/login/google",   "statusCode": 404 },
+    { "route": "/.auth/login/facebook", "statusCode": 404 },
+    { "route": "/.auth/login/twitter",  "statusCode": 404 },
+    {
+      "route": "/*",
+      "allowedRoles": ["admin"]
+    }
+  ],
+  
+  "responseOverrides": {
+    "401": {
+      "statusCode": 302,
+      "redirect": "/login"
+    }
+  },
+  
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/assets/*", "/*.{json,txt}"]
+  },
+
+  "mimeTypes": {
+    ".json": "text/json"
+  },
+
+  "platform": {
+    "apiRuntime": "node:14"
+  }
+}
