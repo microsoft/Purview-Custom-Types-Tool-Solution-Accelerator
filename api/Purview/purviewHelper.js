@@ -1,12 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-const fetch = require("node-fetch");
+// const fetch = require("node-fetch");
 
 const AtlasAccountName = process.env["AtlasAccountName"] || null,
       apiPrefix        = `https://${AtlasAccountName}.catalog.purview.azure.com/api`;
 
 // GET all type definitions
 async function getTypeDefs(token) {
+  const fetch = (await import('node-fetch')).default;
+
   const apiUrl        = (token && `${apiPrefix}/atlas/v2/types/typedefs`) || null,
         fetchResponse = apiUrl && await fetch(apiUrl, {headers:{'Authorization': `Bearer ${token}`}});
 
